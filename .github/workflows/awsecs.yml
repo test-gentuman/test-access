@@ -28,4 +28,4 @@ jobs:
           tail-logs: true
           assign-public-ip: 'ENABLED'
           override-container-environment: |
-            GIT_BRANCH=${{ github.head_ref || github.ref_name }}
+            GIT_BRANCH=feature/DEV-6125

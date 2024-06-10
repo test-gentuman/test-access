@@ -5,7 +5,7 @@ on:
       - "*"
 jobs:
   release:
-    runs-on: ubuntu-latest
+    runs-on: ec2-selfhosted
     steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1

@@ -3,15 +3,15 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-    - name: Run ECS Task
-    id: run-task
-    uses: geekcell/github-action-aws-ecs-run-task@v3.0.0
-    with:
-      cluster: UnitTests-Cluster
-      task-definition: test-deploy
-      subnet-ids: subnet-0e092c064db49592d
-      security-group-ids: sg-0a7f6cc2ffca72a1f
-      tail-logs: true
-      assign-public-ip: 'DISABLED'
-      override-container-environment: |
-        GIT_BRANCH=${{ github.head_ref || github.ref_name }}
+      - name: Run ECS Task
+        id: run-task
+        uses: geekcell/github-action-aws-ecs-run-task@v3.0.0
+        with:
+          cluster: UnitTests-Cluster
+          task-definition: test-deploy
+          subnet-ids: subnet-0e092c064db49592d
+          security-group-ids: sg-0a7f6cc2ffca72a1f
+          tail-logs: true
+          assign-public-ip: 'DISABLED'
+          override-container-environment: |
+            GIT_BRANCH=${{ github.head_ref || github.ref_name }}

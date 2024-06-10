@@ -20,9 +20,12 @@ jobs:
         with:
           cluster: UnitTests-Cluster
           task-definition: unit-test
-          subnet-ids: subnet-0e092c064db49592d
+          subnet-ids: |
+            subnet-0e092c064db49592d
+            subnet-01e5c0997c2e185ba
+            subnet-0ab7be6ede0b3da9f
           security-group-ids: sg-0a7f6cc2ffca72a1f
           tail-logs: true
-          assign-public-ip: 'DISABLED'
-          override-container-environment:
+          assign-public-ip: 'ENABLED'
+          override-container-environment: |
             GIT_BRANCH=${{ github.head_ref || github.ref_name }}

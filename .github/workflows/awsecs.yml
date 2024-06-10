@@ -27,5 +27,6 @@ jobs:
           security-group-ids: sg-0a7f6cc2ffca72a1f
           tail-logs: true
           assign-public-ip: 'ENABLED'
+          override-container: app
           override-container-environment: |
             GIT_BRANCH=feature/DEV-6125

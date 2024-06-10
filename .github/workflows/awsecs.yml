@@ -1,0 +1,11 @@
+- name: Trigger unit tests on PR
+  id: run-task
+  uses: geekcell/github-action-aws-ecs-run-task@v3.0.0
+  with:
+    cluster: UnitTests-Cluster
+    task-definition: test-deploy
+    subnet-ids: subnet-0e092c064db49592d
+    security-group-ids: sg-0a7f6cc2ffca72a1f
+    tail-logs: true
+    override-container-environment: |
+      GIT_BRANCH=${{ github.head_ref || github.ref_name }}

@@ -11,6 +11,7 @@ jobs:
         id: run-task
         uses: geekcell/github-action-aws-ecs-run-task@v3.0.0
         with:
+          aws-region: eu-central-1
           cluster: UnitTests-Cluster
           task-definition: test-deploy
           subnet-ids: subnet-0e092c064db49592d

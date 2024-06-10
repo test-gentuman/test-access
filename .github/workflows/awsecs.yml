@@ -1,6 +1,6 @@
 name: Unit Tests
 on:
-  push:
+  pull_request:
     branches:
       - "*"
 jobs:
@@ -29,4 +29,4 @@ jobs:
           assign-public-ip: 'ENABLED'
           override-container: aws-ecs-test
           override-container-environment: |
-            GIT_BRANCH=feature/DEV-6125
+            GIT_BRANCH=${{ github.head_ref || github.ref_name }}

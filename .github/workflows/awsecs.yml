@@ -2,7 +2,7 @@ name: Unit Tests
 on:
   pull_request:
     branches:
-      - "feature/DEV.*"
+      - "feature\/DEV.*"
 jobs:
   release:
     runs-on: self-hosted

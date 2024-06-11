@@ -5,7 +5,7 @@ on:
       - "*"
 jobs:
   unit_tests:
-    runs-on: self-hosted
+    runs-on: my-ecs-runner
     steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1

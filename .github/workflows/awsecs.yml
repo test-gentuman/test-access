@@ -4,8 +4,37 @@ on:
     branches:
       - "*"
 jobs:
+  start_runner:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        id: authorize
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1
+      - name: Run ECS Task with Runner
+        id: run-task
+        uses: geekcell/github-action-aws-ecs-run-task@v3.0.0
+        with:
+          cluster: Github-Runner-Cluster
+          task-definition: GitHub-Actions-Runner-Task
+          subnet-ids: |
+            subnet-0e092c064db49592d
+            subnet-01e5c0997c2e185ba
+            subnet-0ab7be6ede0b3da9f
+          security-group-ids: sg-0a7f6cc2ffca72a1f
+          tail-logs: true
+          assign-public-ip: 'ENABLED'
+          override-container: github-runner
+          #we can override the ecs container environment variables if needed
+          override-container-environment: |
+            RUNNER_NAME='runner-for-tests'
+            GITHUB_ACCESS_TOKEN=${{ secrets.GITHUB_ACCESS_TOKEN }}
+            RUNNER_REPOSITORY_URL='https://github.com/${{ github.repository }}'
   unit_tests:
-    runs-on: my-ecs-runner
+    runs-on: runner-for-tests
     steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1

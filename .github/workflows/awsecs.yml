@@ -31,8 +31,8 @@ jobs:
           #we can override the ecs container environment variables if needed
           override-container-environment: |
             GITHUB_ACCESS_TOKEN=${{ secrets.GH_TOKEN }}
-            RUNNER_NAME='runner-for-unit-tests'
-            RUNNER_REPOSITORY_URL='https://github.com/${{ github.repository }}'
+            RUNNER_NAME=runner-for-unit-tests
+            RUNNER_REPOSITORY_URL=https://github.com/${{ github.repository }}
   unit_tests:
     runs-on: runner-for-unit-tests
     steps:

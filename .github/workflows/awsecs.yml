@@ -32,7 +32,7 @@ jobs:
           override-container-environment: |
             GITHUB_ACCESS_TOKEN=${{ secrets.GITHUB_ACCESS_TOKEN }}
             RUNNER_NAME='runner-for-unit-tests'
-            RUNNER_REPOSITORY_URL='https://github.com/${{ github.repository }}'
+            RUNNER_URL='https://github.com/${{ github.repository }}'
   unit_tests:
     runs-on: runner-for-unit-tests
     steps:

@@ -1,0 +1,45 @@
+{
+    "family": "unit-test",
+    "containerDefinitions": [
+        {
+            "name": "aws-ecs-test",
+            "image": "theproteinworks/proteinworks-unit-tests-docker:1.0.0",
+            "repositoryCredentials": {
+                "credentialsParameter": "arn:aws:secretsmanager:eu-central-1:835254266058:secret:dev/DockerHubSecret-VKFHTJ"
+            },
+            "cpu": 0,
+            "portMappings": [],
+            "essential": true,
+            "environment": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "linuxParameters": {
+                "capabilities": {
+                    "add": [],
+                    "drop": []
+                }
+            },
+            "privileged": false,
+            "readonlyRootFilesystem": false,
+            "pseudoTerminal": false,
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "awslogs-test",
+                    "awslogs-create-group": "true",
+                    "awslogs-region": "eu-central-1",
+                    "awslogs-stream-prefix": "awslogs-test"
+                }
+            },
+            "systemControls": []
+        }
+    ],
+    "taskRoleArn": "arn:aws:iam::835254266058:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::835254266058:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "1024",
+    "memory": "2048"
+}

@@ -18,13 +18,12 @@ jobs:
         id: run-ecs-task-runner
         uses: geekcell/github-action-aws-ecs-run-task@v3.0.0
         with:
-          cluster: Github-Runner-Cluster
+          cluster: Github-Actions-Cluster
           task-definition: GitHub-Actions-Runner-Task
           subnet-ids: |
-            subnet-0e092c064db49592d
-            subnet-01e5c0997c2e185ba
-            subnet-0ab7be6ede0b3da9f
-          security-group-ids: sg-0a7f6cc2ffca72a1f
+            subnet-0345564be17a91f7a
+            subnet-0936b44dd7729cb7d
+          security-group-ids: sg-055300fefe3332569
           tail-logs: true
           assign-public-ip: 'ENABLED'
           override-container: github-runner
@@ -47,13 +46,12 @@ jobs:
         id: run-ecs-task-unit-tests
         uses: geekcell/github-action-aws-ecs-run-task@v3.0.0
         with:
-          cluster: UnitTests-Cluster
+          cluster: Github-Actions-Cluster
           task-definition: unit-test
           subnet-ids: |
-            subnet-0e092c064db49592d
-            subnet-01e5c0997c2e185ba
-            subnet-0ab7be6ede0b3da9f
-          security-group-ids: sg-0a7f6cc2ffca72a1f
+            subnet-0345564be17a91f7a
+            subnet-0936b44dd7729cb7d
+          security-group-ids: sg-055300fefe3332569
           tail-logs: true
           assign-public-ip: 'ENABLED'
           override-container: aws-ecs-test

@@ -1,32 +1,32 @@
-name: Unit Tests
-on:
-  pull_request:
-    branches:
-      - "*"
-jobs:
-  unit_tests:
-    runs-on: my-ecs-runner
-    steps:
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        id: authorize
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-central-1
-      - name: Run ECS Task
-        id: run-task
-        uses: geekcell/github-action-aws-ecs-run-task@v4.0.0
-        with:
-          cluster: Github-Actions-Cluster
-          task-definition: unit-test
-          subnet-ids: |
-            subnet-0e092c064db49592d
-            subnet-01e5c0997c2e185ba
-            subnet-0ab7be6ede0b3da9f
-          security-group-ids: sg-0a7f6cc2ffca72a1f
-          tail-logs: true
-          assign-public-ip: 'ENABLED'
-          override-container: aws-ecs-test
-          override-container-environment: |
-            GIT_BRANCH=${{ github.head_ref || github.ref_name }}
+  name: Unit Tests
+  on:
+    workflow_dispatch:
+      branches:
+        - "*"
+  jobs:
+    unit_tests:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Configure AWS credentials
+          uses: aws-actions/configure-aws-credentials@v1
+          id: authorize
+          with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws-region: eu-central-1
+        - name: Run ECS Task
+          id: run-task
+          uses: geekcell/github-action-aws-ecs-run-task@v4.0.0
+          with:
+            cluster: Github-Actions-Cluster
+            task-definition: unit-test
+            subnet-ids: |
+              subnet-0e092c064db49592d
+              subnet-01e5c0997c2e185ba
+              subnet-0ab7be6ede0b3da9f
+            security-group-ids: sg-0a7f6cc2ffca72a1f
+            tail-logs: true
+            assign-public-ip: 'ENABLED'
+            override-container: aws-ecs-test
+            override-container-environment: |
+              GIT_BRANCH=${{ github.head_ref || github.ref_name }}

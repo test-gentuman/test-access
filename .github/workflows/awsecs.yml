@@ -1,11 +1,11 @@
 name: Unit Tests
 on:
-  pull_request:
+  workflow_dispatch:
     branches:
       - "*"
 jobs:
   unit_tests:
-    runs-on: my-ecs-runner
+    runs-on: ubuntu-latest
     steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1

@@ -104,7 +104,7 @@ const main = async () => {
         const taskId = taskArn.split('/').pop();
         core.saveState('task-arn', taskArn);
         core.saveState('task-id', taskId);
-        core.saveState('task-finished', true);
+        core.saveState('task-finished', false);
         core.saveState('ecs-session', ecs);
         core.setOutput('task-arn', taskArn);
         core.setOutput('task-id', taskId);
@@ -123,7 +123,6 @@ const main = async () => {
             core.saveState('task-finished', true);
             return;
         }
-        core.saveState('task-finished', false);
         // If taskWaitUntilStopped is false, we can bail out here because we can not tail logs or have any
         // information on the exitCodes or status of the task
         if (!taskWaitUntilStopped) {

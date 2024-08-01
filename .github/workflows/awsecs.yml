@@ -16,7 +16,7 @@ jobs:
           aws-region: eu-central-1
       - name: Run ECS Task
         id: run-task
-        uses: geekcell/github-action-aws-ecs-run-task@v4.0.0
+        uses: ./.github/actions/run-ecs
         with:
           cluster: Github-Actions-Cluster
           task-definition: unit-test

@@ -1,4 +1,4 @@
-name: Unit Tests
+name: Unit Tests Workflow
 on:
   workflow_dispatch:
     branches:

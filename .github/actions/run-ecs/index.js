@@ -212,7 +212,7 @@ const main = async () => {
         // Describe Task to get Exit Code and Exceptions
         core.debug(`Process exit code and exception.`);
         task = await ecs.describeTasks({cluster, tasks: [taskArn]});
-
+        core.saveState('task-finished', true);
         // Get exitCode
         if (task.tasks[0].containers[0].exitCode !== 0) {
             core.info(`Task failed, see details on Amazon ECS console: https://console.aws.amazon.com/ecs/home?region=${aws.config.region}#/clusters/${cluster}/tasks/${taskId}/details`);

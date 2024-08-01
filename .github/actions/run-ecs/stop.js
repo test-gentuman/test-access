@@ -1,13 +1,13 @@
 const core = require('@actions/core');
 const aws = require('aws-sdk');
 
-const {ECS, waitUntilTasksRunning} = require('@aws-sdk/client-ecs');
+const {ECS} = require('@aws-sdk/client-ecs');
 
 const main = async () => {
     try {
-        core.info('Post run blah blah.');
-        if (core.getState('task-finishef') === 'true') {
-            core.info('Task already finished. Exiting.');
+        core.info('Post ECS Task Run.');
+        if (core.getState('task-finished') === 'true') {
+            core.info('ECS task already finished. Exiting.');
             return;
         }
         const ecs = new ECS({
@@ -16,15 +16,15 @@ const main = async () => {
 
         const cluster = core.getInput('cluster', {required: true});
 
-        core.info(`Stopping task as run ended.`)
+        core.info(`Stopping ECS task as run ended.`)
 
         const taskStopParams = {
             cluster: cluster,
             task: core.getState('task-id'),
-            reason: 'Task was stopped by the action.'
+            reason: 'Task was stopped by the github action.'
         }
         let response = await ecs.stopTask(taskStopParams);
-        core.info("Response from ECS:" + response.task.stoppedReason);
+        core.info("Response from ECS: " + response.task.stoppedReason);
     } catch (e) {
         core.info(error.stack);
     }

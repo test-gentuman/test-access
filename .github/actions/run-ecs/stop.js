@@ -15,17 +15,6 @@ const main = async () => {
         });
 
         const cluster = core.getInput('cluster', {required: true});
-        const task = core.getState('task-arn');
-
-
-        core.info(`Wait for task to run. Just in case it is still starting.`)
-
-        await waitUntilTasksRunning({
-            client: ecs,
-            maxWaitTime: 300,
-            maxDelay: 5,
-            minDelay: 5,
-        }, {cluster, tasks: [task]});
 
         core.info(`Stopping task as run ended.`)
 

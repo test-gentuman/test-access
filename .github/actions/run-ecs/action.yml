@@ -1,6 +1,6 @@
-name: 'Run AWS ECS Fargate Task'
+name: 'Private Run AWS ECS Fargate Task'
 description: >-
-  Run an AWS ECS Fargate task and execute a custom commands. See the log output of the commands.
+  This is our private ECS Runner action
 
 branding:
   icon: 'activity'

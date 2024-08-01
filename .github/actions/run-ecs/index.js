@@ -102,6 +102,10 @@ const main = async () => {
         // Get taskArn and taskId
         const taskArn = task.tasks[0].taskArn;
         const taskId = taskArn.split('/').pop();
+        core.saveState('task-arn', taskArn);
+        core.saveState('task-id', taskId);
+        core.saveState('task-finished', true);
+        core.saveState('ecs-session', ecs);
         core.setOutput('task-arn', taskArn);
         core.setOutput('task-id', taskId);
         core.info(`Starting Task with ARN: ${taskArn}\n`);
@@ -116,13 +120,15 @@ const main = async () => {
             }, {cluster, tasks: [taskArn]});
         } catch (error) {
             core.setFailed(`Task did not start successfully. Error: ${error.name}. State: ${error.state}.`);
+            core.saveState('task-finished', true);
             return;
         }
-
+        core.saveState('task-finished', false);
         // If taskWaitUntilStopped is false, we can bail out here because we can not tail logs or have any
         // information on the exitCodes or status of the task
         if (!taskWaitUntilStopped) {
             core.info(`Task is running. Exiting without waiting for task to stop.`);
+            core.saveState('task-finished', true);
             return;
         }
 

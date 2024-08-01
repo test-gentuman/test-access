@@ -5,13 +5,8 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint **.js",
-    "build": "ncc build index.js -o dist",
-    "update-readme": "action-docs -u",
+    "build": "ncc build index.js -o dist && ncc build stop.js -o dist/stop && mv dist/stop/index.js dist/stop.js && rm -rf dist/stop",
     "test": "eslint **.js && jest --coverage"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/geekcell/github-action-aws-ecs-run-task.git"
   },
   "keywords": [
     "aws",
@@ -20,8 +15,7 @@
     "actions",
     "node"
   ],
-  "author": "GeekCell GmbH <hello@geekcell.io> (https://www.geekcell.io/)",
-  "license": "Apache-2.0",
+  "author": "Siarhei Astapchyk",
   "dependencies": {
     "@actions/core": "^1.9.1",
     "@aws-sdk/client-ecs": "^3.609.0",

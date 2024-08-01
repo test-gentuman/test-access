@@ -1,22 +1,22 @@
 const core = require('@actions/core');
 const aws = require('aws-sdk');
 
-const {ECS, waitUntilTasksRunning, waitUntilTasksStopped} = require('@aws-sdk/client-ecs');
-
-const smoketail = require('smoketail')
-const {StopTaskRequest} = require("aws-sdk/clients/ecs");
+const {ECS, waitUntilTasksRunning} = require('@aws-sdk/client-ecs');
 
 const main = async () => {
     try {
+        core.info('Post run blah blah.');
         if (core.getState('task-finishef') === 'true') {
             core.info('Task already finished. Exiting.');
             return;
         }
+        const ecs = new ECS({
+            customUserAgent: 'github-action-aws-ecs-run-task',
+        });
 
         const cluster = core.getInput('cluster', {required: true});
         const task = core.getState('task-arn');
-        /** @type {ECS} */
-        const ecs = core.getState('ecs-session');
+
 
         core.info(`Wait for task to run. Just in case it is still starting.`)
 

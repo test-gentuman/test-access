@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Run ECS Task
         id: run-task
-        uses: igentuman/ecs-run@v1.0.0
+        uses: igentuman/ecs-run@main
         with:
           cluster: Github-Actions-Cluster
           task-definition: unit-test

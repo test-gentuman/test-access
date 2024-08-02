@@ -24,7 +24,7 @@ jobs:
           path: ./.github/actions/ecs-run
       - name: Run ECS Task
         id: run-task
-        uses: igentuman/ecs-run@main
+        uses: ./.github/actions/ecs-run
         with:
           cluster: Github-Actions-Cluster
           task-definition: unit-test

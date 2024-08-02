@@ -16,6 +16,12 @@ jobs:
           aws-region: eu-central-1
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Checkout private action repository
+        uses: actions/checkout@v2
+        with:
+          repository: igentuman/ecs-run
+          token: ${{ secrets.GH_TOKEN }}
+          path: ./.github/actions/ecs-run
       - name: Run ECS Task
         id: run-task
         uses: igentuman/ecs-run@main

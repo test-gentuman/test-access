@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: igentuman/ecs-run
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GH_ACTIONS_TOKEN }}
           path: ./.github/actions/ecs-run
       - name: Run ECS Task
         id: run-task
